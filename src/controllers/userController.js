@@ -76,7 +76,7 @@ export const getUsers = async (req, res) => {
         const user = await getUsersService();
 
         return res.status(200).json({
-            message: "Usuários listados com sucesso",
+            message: "Usuários listado com sucesso",
             user
         });
 
