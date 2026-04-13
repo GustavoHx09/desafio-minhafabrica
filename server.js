@@ -9,5 +9,5 @@ const PORT = 3000;
 connectDB();
 
 app.listen(PORT, () => {
-    console.log('O servidor está rodando na porta ${PORT}')
+    console.log('O servidor está rodando na porta', PORT)
 });
