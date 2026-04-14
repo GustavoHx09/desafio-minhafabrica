@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import {
     createUserRepo,
     getUsersRepo,
@@ -7,7 +8,11 @@ import {
 } from "../repositories/userRepo.js";
 
 export const createUserService = async (data) => {
-    // regra de negócio
+    // criptografar senha
+    const hashedPassword = await bcrypt.hash(data.pass, 10);
+
+    data.pass = hashedPassword;
+
     return await createUserRepo(data);
 };
 
