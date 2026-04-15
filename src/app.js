@@ -7,7 +7,7 @@ const app = express();
 app.use(
     cors({
         origin: [
-            "https://desafio-minhafabrica-frontend-apd2ol0ll.vercel.app",
+            "https://desafio-minhafabrica-frontend.vercel.app",
             "http://localhost:3000",
 
         ]
