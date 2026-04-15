@@ -4,7 +4,7 @@ import { connectDB } from "./src/config/connectDB.js";
 
 dotenv.config();
 
-const PORT = 3000;
+const PORT = 3001;
 
 connectDB();
 
