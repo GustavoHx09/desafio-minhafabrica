@@ -27,7 +27,14 @@ export const getUserByIdService = async (id) => {
 };
 
 export const updateUserService = async (id, data) => {
-    // regra de negócio
+
+     if (data.pass) {
+        const hashedPassword = await bcrypt.hash(data.pass, 10);
+        data.pass = hashedPassword;
+    } else {
+        delete data.pass;
+    }
+    
     return await updateUserRepo(id, data);
 };
 
