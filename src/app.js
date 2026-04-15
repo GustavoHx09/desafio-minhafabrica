@@ -6,7 +6,11 @@ const app = express();
 
 app.use(
     cors({
-        origin: "https://desafio-minhafabrica-frontend.vercel.app/",
+        origin: [
+            "https://desafio-minhafabrica-frontend.vercel.app/",
+            "http://localhost:3000",
+
+        ]
     })
 );
 
