@@ -157,7 +157,7 @@ origin: "http://localhost:3000";
 
 ---
 
-##❗ Problemas comuns
+## ❗ Problemas comuns
 
 - ❌ Erro de CORS
 Verifique configuração do cors
