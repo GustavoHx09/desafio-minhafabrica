@@ -19,8 +19,8 @@ async function seed() {
     // inserindo usuários
     const usersData = [
       {
-        name: "Teste",
-        email: "admin@email.com",
+        name: "Admin",
+        email: "admin@gmail.com",
         pass: await bcrypt.hash("123456", 10)
       },
       {
