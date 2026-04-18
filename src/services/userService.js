@@ -76,7 +76,7 @@ export const updateUserService = async (id, data) => {
         }
     } else {
         delete data.pass;
-    } 
+    }
     if (data.profile === user.profile) {
         delete data.profile;
     } else if (data.profile === "") {
@@ -84,7 +84,10 @@ export const updateUserService = async (id, data) => {
     }
 
     if (Object.keys(data).length === 0) {
-        throw new Error("Nenhum campo foi enviado para atualização");
+        throw {
+            statusCode: 400,
+            message: "Nenhum campo válido para atualização"
+        }
     }
 
     return await updateUserRepo(id, data);
