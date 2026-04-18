@@ -19,10 +19,16 @@ export const createUser = async (req, res) => {
         });
 
     } catch (error) {
-        return res.status(500).json({
-            message: "Erro ao criar usuário",
-            error: error.message
-        });
+        // tratamento para email duplicado
+        if (error.code === 11000) {
+            return res.status(400).json({
+                message: "Email já cadastrado, por favor insira outro!"
+            });
+        } else {
+            return res.status(error.statusCode || 500).json({
+                message: error.message || "Erro ao criar usuário"
+            });
+        }
     }
 };
 
@@ -44,10 +50,17 @@ export const updateUser = async (req, res) => {
         });
 
     } catch (error) {
-        return res.status(500).json({
-            message: "Erro ao atualizar usuário",
-            error: error.message
-        });
+        // tratamento para email duplicado
+        if (error.code === 11000) {
+            return res.status(400).json({
+                message: "Email já cadastrado, por favor insira outro!"
+            });
+        } else {
+            return res.status(500).json({
+                message: "Erro ao atualizar usuário",
+                error: error.message
+            });
+        }
     }
 };
 

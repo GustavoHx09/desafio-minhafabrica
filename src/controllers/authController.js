@@ -8,7 +8,7 @@ export const login = async (req, res) => {
 
     // busca o usuário no banco pelo email
     const user = await users.findOne({ email });
-    
+
     if (!user) {
       return res.status(401).json({ message: "Credenciais inválidas" });
     }

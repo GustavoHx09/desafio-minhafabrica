@@ -6,7 +6,7 @@ import {
     deleteProductService
 } from "../services/productService.js";
 
-// Criar usuario
+// Criar produto
 export const createProduct = async (req, res) => {
     try {
         const data = req.body;
@@ -26,12 +26,11 @@ export const createProduct = async (req, res) => {
     }
 };
 
-// Atualizar usuario
+// Atualizar produto
 export const updateProduct = async (req, res) => {
     try {
         const id = req.params.id;
         const data = req.body;
-
         const product = await updateProductService(
             id,
             data,

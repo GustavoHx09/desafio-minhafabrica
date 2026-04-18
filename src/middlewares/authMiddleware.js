@@ -6,7 +6,7 @@ export const authMiddleware = (req, res, next) => {
   // se nao enviar o token
   if (!authHeader) {
     return res.status(401).json({
-      message: "Token não fornecido"
+      message: "Acesso não autorizado."
     });
   }
 
@@ -14,6 +14,8 @@ export const authMiddleware = (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
   try {
+
+    // verifica o token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     // salva dados do usuário na requisição

@@ -4,6 +4,18 @@ export const getDashboard = async (req, res) => {
   try {
     const data = await getDashboardData();
 
+    if (data.totalUsers === 0) {
+      return res.status(200).json({
+        message: "Não existe usuários cadastrados!"
+      })
+    };
+
+    if (data.totalProducts === 0) {
+      return res.status(200).json({
+        message: "Não existe produtos cadastrados!"
+      })
+    };
+
     return res.status(200).json(data);
 
   } catch (error) {
