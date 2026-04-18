@@ -29,3 +29,13 @@ export const authMiddleware = (req, res, next) => {
     });
   }
 };
+
+export const isAdmin = (req, res, next) => {
+
+  if (req.user.profile !== "admin") {
+    return res.status(403).json({
+      message: "Acesso negado"
+    });
+  }
+  next();
+}

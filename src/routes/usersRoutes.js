@@ -1,5 +1,4 @@
 import { Router } from 'express';
-// descomentar após finalizar os controllers
 import {
   getUsers,
   getUserById,
@@ -7,14 +6,15 @@ import {
   updateUser,
   deleteUser
 } from '../controllers/userController.js';
+import { isAdmin } from '../middlewares/authMiddleware.js';
 
 const router = Router();
 
 // aqui implementar as rotas baseadas no controller
 router.get('/', getUsers);
 router.get('/:id', getUserById);
-router.post('/', createUser);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.post('/', isAdmin, createUser);
+router.put('/:id', isAdmin, updateUser);
+router.delete('/:id', isAdmin, deleteUser);
 
 export default router;

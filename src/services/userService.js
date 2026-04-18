@@ -6,6 +6,7 @@ import {
     updateUserRepo,
     deleteUserRepo
 } from "../repositories/userRepo.js";
+import users from "../models/usersModel.js";
 
 export const createUserService = async (data) => {
 
@@ -48,18 +49,42 @@ export const getUserByIdService = async (id) => {
 
 export const updateUserService = async (id, data) => {
 
+    // busca usuário atual
+    const user = await users.findById(id);
+
+    console.log(user);
+
     // se caso o campo vier vazio ele NÃO altera
     if (data.name === "") {
         delete data.name;
-    } if (data.email === "") {
+    } else if (data.name === user.name) {
+        delete data.name;
+    }
+    if (data.email === "") {
         delete data.email;
-    } if (data.pass) {
-        const hashedPassword = await bcrypt.hash(data.pass, 10);
-        data.pass = hashedPassword;
+    } else if (data.email === user.email) {
+        delete data.email;
+    }
+    if (data.pass) {
+        const isMatch = await bcrypt.compare(data.pass, user.pass);
+        if (isMatch) {
+            // mesma senha -> não atualiza
+            delete data.pass;
+        } else {
+            // senha nova → criptografa
+            data.pass = await bcrypt.hash(data.pass, 10);
+        }
     } else {
         delete data.pass;
-    } if (data.profile === "") {
+    } 
+    if (data.profile === user.profile) {
         delete data.profile;
+    } else if (data.profile === "") {
+        delete data.profile;
+    }
+
+    if (Object.keys(data).length === 0) {
+        throw new Error("Nenhum campo foi enviado para atualização");
     }
 
     return await updateUserRepo(id, data);

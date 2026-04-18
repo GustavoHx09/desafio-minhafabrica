@@ -21,7 +21,8 @@ async function seed() {
       {
         name: "Admin",
         email: "admin@gmail.com",
-        pass: await bcrypt.hash("123456", 10)
+        pass: await bcrypt.hash("123456", 10),
+        profile: "admin"
       },
       {
         name: "teste01",
