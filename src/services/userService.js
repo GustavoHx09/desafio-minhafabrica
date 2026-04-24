@@ -19,11 +19,11 @@ export const createUserService = async (data) => {
         const error = new Error("Campo 'email' não foi definido ou está faltando!");
         error.statusCode = 400;
         throw error;
-    } if (data.password && data.password.length >= 6) {
+    } if (data.pass && data.pass.length >= 6) {
         const hashedPassword = await bcrypt.hash(data.pass, 10);
         data.pass = hashedPassword;
     } else {
-        const error = new Error("Campo 'password' deve conter no mínimo 6 caracteres!");
+        const error = new Error("Campo 'pass' deve conter no mínimo 6 caracteres!");
         error.statusCode = 400;
         throw error;
     } if (data.profile === "") {
