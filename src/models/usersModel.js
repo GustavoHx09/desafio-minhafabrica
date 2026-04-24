@@ -19,7 +19,7 @@ const usersSchema = new mongoose.Schema({
     pass: {
         type: String,
         required: true,
-        minlenght: 6
+        minlength: 6
     },
 
     profile: {
