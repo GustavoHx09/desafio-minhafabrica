@@ -33,6 +33,9 @@ cd desafiomf
 Instale as dependências:
 ```bash
 npm install
+
+npm i express mongoose dotenv
+
 ```
 
 No frontend quando voce definiu a URI da api como:
