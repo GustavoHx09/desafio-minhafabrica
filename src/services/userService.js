@@ -52,8 +52,6 @@ export const updateUserService = async (id, data) => {
     // busca usuário atual
     const user = await users.findById(id);
 
-    console.log(user);
-
     // se caso o campo vier vazio ele NÃO altera
     if (data.name === "") {
         delete data.name;
@@ -65,8 +63,9 @@ export const updateUserService = async (id, data) => {
     } else if (data.email === user.email) {
         delete data.email;
     }
-    if (data.pass) {
+    if (data.pass && data.pass.length >= 6) {
         const isMatch = await bcrypt.compare(data.pass, user.pass);
+
         if (isMatch) {
             // mesma senha -> não atualiza
             delete data.pass;
@@ -74,14 +73,14 @@ export const updateUserService = async (id, data) => {
             // senha nova → criptografa
             data.pass = await bcrypt.hash(data.pass, 10);
         }
-    } else if (data.password < 6) {
+    } else if (data.pass < 6) {
         throw {
             statusCode: 400,
             message: "A senha deve ter no mínimo 6 caracteres"
         }
     } else {
         delete data.pass;
-    }
+    } 
     if (data.profile === user.profile) {
         delete data.profile;
     } else if (data.profile === "") {
